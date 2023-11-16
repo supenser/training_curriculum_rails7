@@ -29,12 +29,14 @@ class CalendarsController < ApplicationController
 
     plans = Plan.where(date: @todays_date..@todays_date + 6)
 
+    #ハッシュロケット箇所をシンボル型に修正
+    #(:month => 〇〇よりも　month: 〇〇の方がシンプルで見やすい)
     7.times do |x|
       today_plans = []
       plans.each do |plan|
         today_plans.push(plan.plan) if plan.date == @todays_date + x
       end
-      days = { :month => (@todays_date + x).month, :date => (@todays_date+x).day, :plans => today_plans}
+      days = {month: (@todays_date + x).month, date: (@todays_date+x).day, plans: today_plans}
       @week_days.push(days)
     end
 
